@@ -1,14 +1,15 @@
 from random import randint
 from kzp_probint import prob_check
-sample = 1000000
-prob = 319.68
-rush_prob = 55
-num = 0
-count = 0
+sample = 10000    #試行回数
+prob = 319.68       #確率
+rush_prob = 0.55
 
-x,y,z=prob_check(prob)
+y,z=prob_check(prob)
+# y:整数変換後の確率　z:10倍回数
 
 jp = 10 ** z
+rush_prob *= 10 ** z
+rush_prob = int(rush_prob)
 jp_ls = []
 while len(jp_ls) < jp:
     n = randint(1,y)
@@ -18,13 +19,19 @@ while len(jp_ls) < jp:
         pass
 
 rush_ls = jp_ls[0:rush_prob]
+c_rush = []
+c_jp = []
 
-while num not in jp_ls:
-    count += 1
-    num = randint(1,y)
+for i in range(sample):
+    pick_num = 0
+    count = 0
+    while pick_num not in jp_ls:
+        count += 1
+        pick_num= randint(1,y)
+        if pick_num in rush_ls:
+            c_rush.append(count)
+        elif pick_num in jp_ls:
+            c_jp.append(count)
+        else:
+            pass
 
-
-
-print(count)
-#print(rush_ls)
-#print(len(rush_ls))
