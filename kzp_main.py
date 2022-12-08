@@ -1,6 +1,7 @@
 from random import randint
 from kzp_probint import prob_check
-sample = 10000    #試行回数
+from kzp_result import result
+sample = 100000    #試行回数
 prob = 319.68       #確率
 rush_prob = 0.55
 
@@ -35,3 +36,4 @@ for i in range(sample):
         else:
             pass
 
+result(c_jp,c_rush)
